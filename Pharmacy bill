@@ -1,0 +1,15 @@
+fun generateInvoice(medicineList: List<Medicine>, total: Double) {
+    val pdfWriter = PdfWriter(FileOutputStream(File(filesDir, "invoice.pdf")))
+    val pdfDoc = PdfDocument(pdfWriter)
+    val doc = Document(pdfDoc)
+
+    doc.add(Paragraph("Haji Medical Centre - HMC"))
+    doc.add(Paragraph("Invoice No: ${UUID.randomUUID()}"))
+    
+    for (med in medicineList) {
+        doc.add(Paragraph("${med.name} - ${med.price} x ${med.stock}"))
+    }
+    doc.add(Paragraph("Total: ₹$total"))
+
+    doc.close()
+}
